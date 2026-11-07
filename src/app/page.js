@@ -1,6 +1,8 @@
 import { getSql, initDb } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
+export const instant = false;
+
 export default async function TodoApp() {
   // Database aur table ensure karein
   try {
@@ -58,14 +60,12 @@ export default async function TodoApp() {
           </span>
         </div>
         
-        {/* Error Notice agar DB URL ya connection mein issue ho */}
         {dbError && (
           <div className="mb-6 bg-red-950/50 border border-red-800 text-red-300 p-3 rounded-lg text-sm">
             <strong>Database Error:</strong> {dbError}
           </div>
         )}
 
-        {/* Add Todo Form */}
         <form action={addTodo} className="flex gap-2 mb-6">
           <input
             type="text"
@@ -76,13 +76,12 @@ export default async function TodoApp() {
           />
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition shadow-lg shadow-blue-600/20"
+            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition shadow-lg shadow-blue-600/20 cursor-pointer"
           >
             Add Task
           </button>
         </form>
 
-        {/* Todo List */}
         <ul className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
           {todos.map((todo) => (
             <li 
